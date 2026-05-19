@@ -1,0 +1,201 @@
+:root {
+    --ink: #152238;
+    --muted-ink: #4c5971;
+    --card-bg: #fdfdff;
+    --panel-bg: #ffffffd1;
+    --line: #d5deeb;
+    --accent: #ff7a18;
+    --accent-soft: #ffd49a;
+    --ring: #3ca7ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 10% 15%, #ffe7c4 0%, transparent 32%),
+        radial-gradient(circle at 85% 25%, #b9dfff 0%, transparent 38%),
+        linear-gradient(140deg, #f6f9ff 0%, #eff7ff 48%, #fff7ec 100%);
+    min-height: 100vh;
+}
+
+.page-shell {
+    width: min(1080px, 92vw);
+    margin: 2rem auto 3rem;
+    background: var(--panel-bg);
+    border: 1px solid #ffffff;
+    border-radius: 26px;
+    box-shadow: 0 30px 65px rgba(12, 32, 64, 0.14);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+.hero {
+    padding: 3.5rem clamp(1.2rem, 2vw + 1rem, 3rem) 2.5rem;
+    background: linear-gradient(130deg, #11223e 0%, #173a63 45%, #1d5f92 100%);
+    color: #ffffff;
+}
+
+.kicker {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--accent-soft);
+}
+
+h1 {
+    margin: 0.8rem 0;
+    font-family: "Playfair Display", serif;
+    line-height: 1.1;
+    font-size: clamp(2rem, 5vw, 3.35rem);
+}
+
+.subtitle {
+    margin: 0;
+    max-width: 62ch;
+    color: #d9ecff;
+    font-size: clamp(1rem, 0.9rem + 0.35vw, 1.2rem);
+}
+
+.hero-stats {
+    margin-top: 1.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+}
+
+.hero-stats article {
+    padding: 0.95rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-stats strong {
+    display: block;
+    font-size: 1.5rem;
+}
+
+.hero-stats span {
+    color: #d9ecff;
+    font-size: 0.92rem;
+}
+
+main {
+    padding: 1.8rem clamp(1rem, 2vw + 1rem, 2.8rem) 2.3rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+}
+
+.benefit-card {
+    grid-column: span 6;
+    padding: 1.25rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 20px rgba(10, 22, 39, 0.05);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(10, 22, 39, 0.11);
+}
+
+.benefit-card h2 {
+    margin: 0 0 0.45rem;
+    font-size: 1.15rem;
+}
+
+.benefit-card p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--muted-ink);
+}
+
+.flow {
+    margin-top: 1.2rem;
+    padding: 1.25rem;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: linear-gradient(125deg, #fff4de 0%, #fff 100%);
+}
+
+.flow h2 {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+}
+
+.flow ol {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+    color: #3d4861;
+}
+
+footer {
+    border-top: 1px solid #eaf0f7;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    color: #5e6d85;
+    font-size: 0.92rem;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fade-up 600ms ease forwards;
+    animation-delay: calc(var(--index, 0) * 90ms);
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 760px) {
+    .page-shell {
+        width: min(1080px, 95vw);
+        margin-top: 1rem;
+        border-radius: 20px;
+    }
+
+    .hero {
+        padding: 2.25rem 1rem 1.7rem;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .benefit-card {
+        grid-column: span 12;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+}
