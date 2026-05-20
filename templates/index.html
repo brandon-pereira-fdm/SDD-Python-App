@@ -4,56 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benefits of Spec-Driven Development</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <div class="reading-progress" aria-hidden="true">
+        <div id="progress-bar"></div>
+    </div>
+
+    <nav class="top-nav">
+        <a href="#hero" class="brand">SDD Studio</a>
+        <div class="nav-links">
+            <a href="#iterations">Iterations</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#flow">Flow</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </nav>
+
     <div class="page-shell">
-        <header class="hero reveal">
+        <header id="hero" class="hero reveal">
             <p class="kicker">Manual Spec-Driven Development</p>
             <h1>Benefits of Spec-Driven Development</h1>
             <p class="subtitle">
-                Spec-Driven Development helps teams define what should be built before implementation begins.
+                Spec-Driven Development helps teams define what should be built before implementation begins, and this page shows six practical iterations that improve both UI quality and user understanding.
             </p>
-            <div class="hero-stats">
+            <div class="hero-stats reveal" style="--index: 1;">
+                {% for item in highlights %}
                 <article>
-                    <strong>4</strong>
-                    <span>Core Benefits</span>
+                    <strong>{{ item.value }}</strong>
+                    <span>{{ item.label }}</span>
                 </article>
-                <article>
-                    <strong>6</strong>
-                    <span>Delivery Stages</span>
-                </article>
-                <article>
-                    <strong>1</strong>
-                    <span>Shared Source of Truth</span>
-                </article>
+                {% endfor %}
             </div>
         </header>
 
         <main>
-            <section class="benefits-grid">
-                {% for benefit in benefits %}
-                <article class="benefit-card reveal" style="--index: {{ loop.index0 }};">
-                    <h2>{{ benefit.title }}</h2>
-                    <p>{{ benefit.description }}</p>
-                </article>
-                {% endfor %}
+            <section id="iterations" class="iteration-track reveal" style="--index: 2;">
+                <h2>Five Iterations</h2>
+                <p class="section-copy">The first five iterations establish clarity, hierarchy, and informative content. Iteration six adds elegant interaction polish inspired by premium product storytelling.</p>
+                <div class="iteration-grid">
+                    {% for card in iteration_cards %}
+                    <article class="iteration-card reveal" style="--index: {{ loop.index + 2 }};">
+                        <h3>{{ card.name }}</h3>
+                        <p><strong>Goal:</strong> {{ card.goal }}</p>
+                        <p><strong>Deliverable:</strong> {{ card.deliverable }}</p>
+                    </article>
+                    {% endfor %}
+                </div>
             </section>
 
-            <section class="flow reveal">
+            <section id="benefits" class="benefits-section reveal" style="--index: 10;">
+                <div class="section-head">
+                    <h2>Benefit Explorer</h2>
+                    <fieldset class="chip-group">
+                        <legend class="sr-only">Filter benefits</legend>
+                        <button type="button" class="chip is-active" data-filter="all">All</button>
+                        <button type="button" class="chip" data-filter="clarity">Clarity</button>
+                        <button type="button" class="chip" data-filter="quality">Quality</button>
+                        <button type="button" class="chip" data-filter="delivery">Delivery</button>
+                    </fieldset>
+                </div>
+
+                <div class="benefits-grid">
+                {% for benefit in benefits %}
+                <article class="benefit-card reveal" style="--index: {{ loop.index + 10 }};" data-category="{{ benefit.category }}">
+                    <h2>{{ benefit.title }}</h2>
+                    <p>{{ benefit.description }}</p>
+                    <p class="impact">{{ benefit.impact }}</p>
+                </article>
+                {% endfor %}
+                </div>
+            </section>
+
+            <section id="flow" class="flow reveal" style="--index: 13;">
                 <h2>SDD Flow</h2>
-                <ol>
+                <ol class="timeline">
                     {% for step in flow_steps %}
-                    <li>{{ step }}</li>
+                    <li>
+                        <h3>{{ step.title }}</h3>
+                        <p>{{ step.note }}</p>
+                    </li>
                     {% endfor %}
                 </ol>
             </section>
+
+            <section id="faq" class="faq reveal" style="--index: 14;">
+                <h2>Clarifications for Teams</h2>
+                <div class="faq-list">
+                    {% for item in faq_items %}
+                    <article class="faq-item" data-faq>
+                        <button type="button" class="faq-trigger" aria-expanded="false">
+                            <span>{{ item.question }}</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-panel" hidden>
+                            <p>{{ item.answer }}</p>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="next-steps reveal" style="--index: 15;">
+                <h2>Next Sprint Actions</h2>
+                <ul>
+                    {% for action in sprint_actions %}
+                    <li>{{ action }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
         </main>
 
-        <footer class="reveal">
+        <footer class="reveal" style="--index: 16;">
             <p>Built with Flask. {{ current_year }}</p>
         </footer>
     </div>
